@@ -14,4 +14,4 @@ async def shorten(url:ValidUrl) -> ResponseUrl:
 
 @router.get('/{slug}')
 async def redirect(slug):
-    pass
+    return await slugger.redirect_user(slug)

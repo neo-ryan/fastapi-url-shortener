@@ -15,3 +15,10 @@ async def add_slug(url_dict:dict):
         data.append(url_dict)
         with open(BASE_DIR / 'db.json', 'w') as f:
             dump(data, f, indent=2)
+            
+async def compare(slug):
+    data = await get_data()
+    for i in data:
+        if i.get('slug') == slug:
+            return i['link']
+    return 'Not Found'

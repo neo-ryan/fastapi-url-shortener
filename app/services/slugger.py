@@ -23,3 +23,6 @@ async def add_slug(url_data:ResponseUrl):
 
 async def get_database():
     return await repository.get_data()
+
+async def redirect_user(slug:str):
+    return await repository.compare(slug)
