@@ -2,6 +2,7 @@ from string import ascii_letters, digits
 from secrets import choice
 from app.database import repository
 from app.models.url import ValidUrl, ResponseUrl
+from fastapi import HTTPException
 
 alphabet = ascii_letters + digits
 
@@ -25,4 +26,8 @@ async def get_database():
     return await repository.get_data()
 
 async def redirect_user(slug:str):
-    return await repository.compare(slug)
+    res = await repository.compare(slug)
+    if res != 'Not Found':
+        return res
+    else:
+        raise HTTPException(status_code=404)
